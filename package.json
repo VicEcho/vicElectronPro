@@ -1,0 +1,85 @@
+{
+  "name": "vic-app",
+  "private": true,
+  "main": "./dist/main.js",
+  "version": "0.0.1",
+  "build": {
+    "appId": "com.vic.app",
+    "directories": {
+      "output": "app"
+    },
+    "files": [
+      "./dist/**/*"
+    ],
+    "mac": {
+      "target": [
+        "dmg"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "asar": false
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowElevation": true,
+    "allowToChangeInstallationDirectory": true,
+    "installerHeaderIcon": "./build/icons/aaa.ico",
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true
+  },
+  "scripts": {
+    "start": "npm run dev:main",
+    "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:main\" ",
+    "dev:main": "webpack --mode development --config webpack.main.js",
+    "dev:renderer": "APP_ROOT=src/renderer umi dev --port=8001",
+    "build:render": "APP_ROOT=src/renderer umi build",
+    "build:main": "webpack --mode production --config webpack.main.js",
+    "build": "npm run build:main && npm run build:render && electron-builder",
+    "test": "umi test",
+    "lint": "eslint --ext .js src mock tests",
+    "precommit": "lint-staged",
+    "package": "electron-builder",
+    "rebuild": "electron-rebuild -m ./app"
+  },
+  "dependencies": {
+    "realm": "^3.6.0"
+  },
+  "devDependencies": {
+    "antd": "^3.19.5",
+    "babel-eslint": "^9.0.0",
+    "concurrently": "^5.0.2",
+    "cross-env": "^6.0.3",
+    "dva": "^2.6.0-beta.6",
+    "electron": "^4.2.5",
+    "electron-builder": "^21.0.8",
+    "electron-rebuild": "^1.8.8",
+    "eslint": "^5.4.0",
+    "eslint-config-umi": "^1.4.0",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-test-renderer": "^16.7.0",
+    "umi": "^2.7.7",
+    "umi-plugin-react": "^1.8.4",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
