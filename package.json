@@ -54,7 +54,7 @@
     "concurrently": "^5.0.2",
     "cross-env": "^6.0.3",
     "dva": "^2.6.0-beta.6",
-    "electron": "^4.2.5",
+    "electron": "^9.1.0",
     "electron-builder": "^21.0.8",
     "electron-rebuild": "^1.8.8",
     "eslint": "^5.4.0",
